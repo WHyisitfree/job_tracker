@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Application Details</h1>
+
+<div class="application-details">
+    {% if user.is_authenticated %}
+    <h2>{{ application.position.title }} at {{ application.company.name }}</h2>
+    <p><strong>Status:</strong> {{ application.status.get_status_display }}</p>
+    <p><strong>Job Type:</strong> {{ application.job_type.type }}</p>
+    <p><strong>Applied Date:</strong> {{ application.applied_date }}</p>
+    <p><strong>Notes:</strong></p>
+    <div>{{ application.notes|safe }}</div>
+
+    {% if application.job_link %}
+    <p><strong>Job Posting:</strong> <a href="{{ application.job_link }}" target="_blank">{{ application.job_link }}</a></p>
+    {% endif %}
+
+    <div class="actions">
+        <a href="{% url 'jobapplication_update' application.pk %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'jobapplication_delete' application.pk %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'jobapplication_list' %}" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

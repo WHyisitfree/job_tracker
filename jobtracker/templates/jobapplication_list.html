@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>My Job Applications</h1>
+
+<a href="{% url 'jobapplication_create' %}" class="btn btn-primary">Add New Application</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th>Applied Date</th>
+            <th>Expected Date</th>
+            <th>wage</th>
+            <th>Overdue</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% if user.is_authenticated %}
+        {% for application in applications %}
+        <tr>
+            <td>{{ application.company.name }}</td>
+            <td>{{ application.position.title|default:"-" }}</td>
+            <td>{{ application.status.get_status_display|default:"-" }}</td>
+            <td>{{ application.date_applied|date:"Y-m-d" }}</td>
+            <td>{{ application.expected_date|date:"Y-m-d"|default:"-" }}</td>
+            <td>{{ application.wage|default:"-"}}</td>
+
+            <td>
+                {% if application.is_overdue %}
+                    <span class="text-danger">Yes</span>
+                {% else %}
+                    <span class="text-success">No</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'jobapplication_detail' application.pk %}" class="btn btn-sm btn-info">View</a>
+                <a href="{% url 'jobapplication_update' application.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'jobapplication_delete' application.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7" class="text-center">
+                No applications yet. <a href="{% url 'jobapplication_create' %}">Add your first application</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

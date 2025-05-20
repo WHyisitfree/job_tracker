@@ -1,0 +1,22 @@
+.sidebar {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar h5 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.sidebar a {
+  display: block;
+  padding: 0.5rem 0;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}

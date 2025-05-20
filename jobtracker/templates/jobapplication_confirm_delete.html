@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+    <h2>Delete Job Application</h2>
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete the job application "{{ object }}"?</p>
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        <a href="{% url 'jobapplication_detail' object.pk %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{%endif%}
+{% endblock %}
