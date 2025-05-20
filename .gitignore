@@ -1,0 +1,29 @@
+echo "# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyd
+*.pyo
+
+# Django
+db.sqlite3
+*.log
+media/
+staticfiles/
+
+# IDE
+.idea/
+.vscode/
+
+# Environment
+.env
+.venv/
+venv/
+env/
+
+# Local settings
+local_settings.py
+
+# OS files
+.DS_Store
+Thumbs.db" > .gitignore
